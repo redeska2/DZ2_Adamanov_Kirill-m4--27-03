@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import './index.css'; 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class ColoredSquare extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: props.initialColor,
+    };
+  }
+
+  handleClick = () => {
+    this.setState((prevState) => ({
+      color: prevState.color === 'red' ? 'blue' : 'red',
+    }));
+  };
+
+  render() {
+    const { color } = this.state;
+    return (
+      <div
+        className="square"
+        style={{ backgroundColor: color }}
+        onClick={this.handleClick}
+      ></div>
+    );
+  }
+}
+
+class App extends Component {
+  render() {
+    return (
+      <div className="app">
+        <ColoredSquare initialColor="red" />
+        <ColoredSquare initialColor="blue" />
+      </div>
+    );
+  }
 }
 
 export default App;
